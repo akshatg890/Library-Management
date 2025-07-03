@@ -2,65 +2,153 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Library Admin Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<style>
+		body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #2a4a6e;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .login-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 8rem;
+        }
+
+        .login-header {
+            background: #2a4a6e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .login-form {
+            padding: 40px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px rgba(42, 74, 110, 0.2);
+            border-color: #2a4a6e;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8395a7;
+        }
+
+        .btn-primary {
+            background-color: #2a4a6e;
+            border-color: #2a4a6e;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d3553;
+            border-color: #1d3553;
+            transform: translateY(-1px);
+        }
+
+        .alert {
+            border-radius: 8px;
+        }
+	</style>
 </head>
 
 <body>
+<header class="header">
 	<div th:insert="comman/header :: header"></div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+</header>
 
-				<h1>Admin Login Page</h1>
-				<form th:action="@{/login}" method="post">
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="login-card">
+				<div class="login-header">
+					<h2 class="mb-0"><i class="fas fa-book-reader mr-2"></i>Library Admin Portal</h2>
+				</div>
+				<div class="login-form">
+					<form th:action="@{/login}" method="post">
 
-					<!-- error message -->
-					<div th:if="${param.error}">
-						<div class="alert alert-danger">Invalid username or
-							password.</div>
-					</div>
-
-					<!-- logout message -->
-					<div th:if="${param.logout}">
-						<div class="alert alert-info">You have been logged out.</div>
-					</div>
-
-					<div class="form-group">
-						<label for="username"> Username </label> : <input type="text"
-							class="form-control" id="username" name="username"
-							placeholder="Enter Email ID" autofocus="autofocus">
-					</div>
-
-					<div class="form-group">
-						<label for="password">Password</label>: <input type="password"
-							id="password" name="password" class="form-control"
-							placeholder="Enter Password" />
-					</div>
-
-					<div class="form-group">
-						<div class="row">
-							<div class="col-sm-6 col-sm-offset-3">
-								<input type="submit" name="login-submit" id="login-submit"
-									class="form-control btn btn-success" value="Log In" />
+						<!-- Error message -->
+						<div th:if="${param.error}">
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<i class="fas fa-exclamation-circle mr-2"></i>Invalid username or password.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
 						</div>
-					</div>
-				</form>
 
+						<!-- Logout message -->
+						<div th:if="${param.logout}">
+							<div class="alert alert-info alert-dismissible fade show" role="alert">
+								<i class="fas fa-check-circle mr-2"></i>You have been logged out.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="username">Username</label>
+							<div class="position-relative">
+								<input type="text" class="form-control" id="username" name="username"
+									   placeholder="Enter your username" autofocus>
+								<i class="fas fa-user input-icon"></i>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password">Password</label>
+							<div class="position-relative">
+								<input type="password" class="form-control" id="password" name="password"
+									   placeholder="Enter your password">
+								<i class="fas fa-key input-icon"></i>
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-block btn-lg rounded-pill">
+							<i class="fas fa-sign-in-alt mr-2"></i>Login
+						</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div th:insert="comman/footer :: footer"></div>
+</div>
+
+<!--<div th:insert="comman/footer :: footer"></div>-->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
